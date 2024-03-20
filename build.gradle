@@ -1,0 +1,72 @@
+plugins {
+  id 'java'
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.13'
+  id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group 'com'
+version '1.0-SNAPSHOT'
+
+repositories {
+  mavenCentral()
+}
+
+ext {
+  junitVersion = '5.9.2'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+  options.encoding = 'UTF-8'
+}
+
+application {
+  mainModule = 'com.airshipg'
+  mainClass.set('com.airshipg.Main')
+}
+
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+  }
+}
+
+javafx {
+  version = '19.0.2'
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+
+dependencies {
+
+  implementation 'org.openjfx:javafx-controls:16.0.2'
+  implementation 'org.openjfx:javafx-fxml:16.0.2'
+
+  implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
+  implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
+
+  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+
+
+}
+
+test {
+  useJUnitPlatform()
+}
+
+jar {
+  manifest {
+    attributes(
+            'Main-Class': 'com.airshipg.Launcher'
+    )
+  }
+}
+
+//shadowJar {
+//  archiveBaseName.set('airshipg-1.0-SNAPSHOT')
+//  archiveClassifier.set('')
+//  archiveVersion.set('')
+//}
