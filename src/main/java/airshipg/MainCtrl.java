@@ -1,13 +1,10 @@
-package com.airshipg;
+package airshipg;
 
-import com.airshipg.Main;
 import java.io.IOException;
-import java.net.URL;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
@@ -15,16 +12,15 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
-import javafx.scene.paint.ImagePattern;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainCtrl {
 
 
-  private static com.airshipg.BoardContainer boardContainer = com.airshipg.BoardContainer.getInstance();
+  private static airshipg.BoardContainer boardContainer = airshipg.BoardContainer.getInstance();
   private Stage primaryStage;
-  private com.airshipg.HelloCtrl helloCtrl;
+  private airshipg.HelloCtrl helloCtrl;
   private Scene hello;
   private FinishCtrl finishCtrl;
   private Scene finish;

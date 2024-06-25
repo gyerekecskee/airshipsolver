@@ -1,72 +1,70 @@
 plugins {
   id 'java'
-  id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.13'
-  id 'com.github.johnrengelman.shadow' version '8.1.1'
+  id 'application'
+  id 'com.github.johnrengelman.shadow' version '7.1.2'
 }
 
-group 'com'
+group 'com.example'
 version '1.0-SNAPSHOT'
 
 repositories {
   mavenCentral()
 }
 
-ext {
-  junitVersion = '5.9.2'
-}
-
-sourceCompatibility = '17'
-targetCompatibility = '17'
-
-tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
-}
-
-application {
-  mainModule = 'com.airshipg'
-  mainClass.set('com.airshipg.Main')
-}
-
 java {
-  toolchain {
-    languageVersion.set(JavaLanguageVersion.of(17))
-  }
-}
-
-javafx {
-  version = '19.0.2'
-  modules = ['javafx.controls', 'javafx.fxml']
+  sourceCompatibility = JavaVersion.VERSION_16
+  targetCompatibility = JavaVersion.VERSION_16
 }
 
 dependencies {
-
-  implementation 'org.openjfx:javafx-controls:16.0.2'
-  implementation 'org.openjfx:javafx-fxml:16.0.2'
-
-  implementation('org.kordamp.ikonli:ikonli-javafx:12.3.1')
-  implementation('org.kordamp.bootstrapfx:bootstrapfx-core:0.4.0')
-
-  testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-
-
+  implementation 'org.openjfx:javafx-controls:19'
+  implementation 'org.openjfx:javafx-fxml:19'
+  // Add other JavaFX modules as needed
 }
 
-test {
-  useJUnitPlatform()
+javafx {
+  version = '19'
+  modules = ['javafx.controls', 'javafx.fxml']
+}
+
+application {
+  mainClass = 'airshipg.Main'
 }
 
 jar {
   manifest {
     attributes(
-            'Main-Class': 'com.airshipg.Launcher'
+            'Main-Class': 'airshipg.Main'
     )
   }
 }
 
-//shadowJar {
-//  archiveBaseName.set('airshipg-1.0-SNAPSHOT')
-//  archiveClassifier.set('')
-//  archiveVersion.set('')
-//}
+shadowJar {
+  mergeServiceFiles()
+  manifest {
+    attributes(
+            'Main-Class': 'airshipg.Main'
+    )
+  }
+  // Ensure that all dependencies are included
+  configurations = [project.configurations.runtimeClasspath]
+}
+
+run {
+  // Use the 'runtimeClasspath' configuration for JavaFX modules
+  jvmArgs = [
+          '--module-path', configurations.runtimeClasspath.asPath,
+          '--add-modules', 'javafx.controls,javafx.fxml'
+  ]
+}
+
+tasks.withType(JavaExec) {
+  // Ensures that all JavaExec tasks (including 'run') use the correct module path
+  doFirst {
+    jvmArgs = [
+            '--module-path', configurations.runtimeClasspath.asPath,
+            '--add-modules', 'javafx.controls,javafx.fxml'
+    ]
+  }
+}

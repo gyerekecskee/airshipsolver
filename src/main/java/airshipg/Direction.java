@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 public enum Direction {
   DOWN,

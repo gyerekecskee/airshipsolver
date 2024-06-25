@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 import java.net.URL;
 import java.util.ResourceBundle;

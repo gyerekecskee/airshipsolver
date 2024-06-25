@@ -1,11 +1,6 @@
-module com.airshipg {
+module airshipg.main {
     requires javafx.controls;
     requires javafx.fxml;
-//    requires javafx.base;
 
-//    requires org.kordamp.ikonli.javafx;
-//    requires org.kordamp.bootstrapfx.core;
-
-  opens com.airshipg to javafx.fxml;
-    exports com.airshipg;
+    exports airshipg;
 }

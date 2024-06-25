@@ -14,17 +14,13 @@
  * limitations under the License.
  */
 
-package com.airshipg;
+package airshipg;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.util.Builder;
-import javafx.util.BuilderFactory;
-import javafx.util.Callback;
 import javafx.util.Pair;
 
 /**

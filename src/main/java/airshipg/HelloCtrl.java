@@ -1,10 +1,9 @@
-package com.airshipg;
+package airshipg;
 
 import java.util.NoSuchElementException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;

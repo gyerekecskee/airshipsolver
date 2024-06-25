@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 import com.graph.AdjacencyMapGraph;
 import com.graph.Edge;
@@ -71,7 +71,7 @@ public class FinishCtrl implements Initializable {
     while (!unFinished.isEmpty() && !current.getElement().canAirshipEscape()) {
       current = unFinished.remove();
       for (Board successor : current.getElement().getAllValidSuccessors()) {
-        com.airshipg.Pair<Boolean, Vertex<Board>> result = reachedPositions.contains(successor);
+        airshipg.Pair<Boolean, Vertex<Board>> result = reachedPositions.contains(successor);
         if (result.getFirst()) {
           if (!areTheyConnected(current, result.getSecond())) {
             reachedPositions.insertEdge(current, result.getSecond());
@@ -82,7 +82,7 @@ public class FinishCtrl implements Initializable {
           unFinished.add(insertedNew);
         }
       }
-      System.out.println("Size of com.airshipg.graph: " + reachedPositions.numVertices());
+      System.out.println("Size of airshipg.graph: " + reachedPositions.numVertices());
       System.out.println("Number of unchecked vertices: " + unFinished.size());
     }
     System.out.println("!unFinished.isEmpty(): " + !unFinished.isEmpty());

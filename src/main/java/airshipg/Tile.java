@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
