@@ -59,7 +59,7 @@ public class MainCtrl {
     helloCtrl = fxmlLoader.getController();
     helloCtrl.setCtrls(this);
     // Apply the background to the Pane
-    helloCtrl.setBackground(background);
+//    helloCtrl.setBackground(background);
 
     fxmlLoader = new FXMLLoader(Main.class.getResource("finish.fxml"));
     Parent root = fxmlLoader.load();

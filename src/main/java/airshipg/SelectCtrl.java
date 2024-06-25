@@ -53,31 +53,31 @@ public class SelectCtrl implements Initializable {
         this.mainCtrl = mainCtrl;
     }
 
-    public void choseair() {
+    public void choseAirship() {
         tileType = (TileType.AIRSHIP);
     }
 
-    public void chosesc() {
+    public void choseWhiteCorner() {
         tileType = (TileType.SMALL_CORNER);
     }
 
-    public void choselc() {
+    public void choseLargeCorner() {
         tileType = (TileType.LARGE_CORNER);
     }
 
-    public void chosee() {
+    public void choseEmpty() {
         tileType = (TileType.EMPTY);
     }
 
-    public void choselb() {
+    public void choseLargeBottom() {
         tileType = (TileType.LARGE_BOTTOM);
     }
 
-    public void chosed() {
+    public void choseDiagonal() {
         tileType = (TileType.DIAGONAL);
     }
 
-    public void chosec() {
+    public void choseColumn() {
         tileType = (TileType.COLUMN);
     }
 }

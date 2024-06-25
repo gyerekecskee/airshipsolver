@@ -52,11 +52,12 @@ public class HelloCtrl {
 
     }
 
-    public void setBackground(Background background) {
-        gPane.setBackground(background);
-    }
+//    public void setBackground(Background background) {
+//        gPane.setBackground(background);
+//    }
 
     public void set31() {
+        System.out.println("hey");
         x2y0 = setType();
         b31.setText(x2y0.toString());
     }

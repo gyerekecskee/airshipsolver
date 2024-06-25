@@ -4,6 +4,8 @@
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
@@ -13,13 +15,62 @@
          <content>
             <HBox fx:id="tipesbox">
                <children>
-                  <Button mnemonicParsing="false" onAction="#choseair" text="airship" />
-                  <Button mnemonicParsing="false" onAction="#chosesc" text="smallcorner" />
-                  <Button mnemonicParsing="false" onAction="#choselc" text="largecorner" />
-                  <Button mnemonicParsing="false" onAction="#choselb" text="bottom" />
-                  <Button mnemonicParsing="false" onAction="#chosed" text="diagonal" />
-                  <Button mnemonicParsing="false" onAction="#chosec" text="column" />
-                  <Button mnemonicParsing="false" onAction="#chosee" text="empty" />
+                  <Button mnemonicParsing="false" onAction="#choseAirship">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@airship.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseWhiteCorner">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@white-corner.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseLargeCorner">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@large-corner.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseLargeBottom">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@large-side.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseDiagonal">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@diagonal.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseColumn">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@column.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button mnemonicParsing="false" onAction="#choseEmpty">
+                     <graphic>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@empty.jpg" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
                </children></HBox>
          </content>
       </ScrollPane>
