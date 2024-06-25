@@ -2,7 +2,7 @@ package com.graph;
 
 //import java.util.Map;
 
-import com.airshipg.Pair;
+import airshipg.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,12 +31,12 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
       return element;
     }
 
-    ///∗∗ Stores the position of this vertex within the com.airshipg.graph's vertex list. ∗/
+    ///∗∗ Stores the position of this vertex within the airshipg.graph's vertex list. ∗/
     public void setPosition(Position<Vertex<V>> p) {
       pos = p;
     }
 
-    ///∗∗ Returns the position of this vertex within the com.airshipg.graph's vertex list. ∗/
+    ///∗∗ Returns the position of this vertex within the airshipg.graph's vertex list. ∗/
     public Position<Vertex<V>> getPosition() {
       return pos;
     }
@@ -83,7 +83,7 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
     }
 
     /**
-     * Stores the position of this edge within the com.airshipg.graph's vertex list.
+     * Stores the position of this edge within the airshipg.graph's vertex list.
      *
      * @param p position of this edge
      */
@@ -92,9 +92,9 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
     }
 
     /**
-     * Returns the position of this edge within the com.airshipg.graph's vertex list.
+     * Returns the position of this edge within the airshipg.graph's vertex list.
      *
-     * @return the position of this edge within the com.airshipg.graph's vertex list
+     * @return the position of this edge within the airshipg.graph's vertex list
      */
     public Position<Edge<V>> getPosition() {
       return pos;
@@ -115,25 +115,25 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
   private final PositionalList<Edge<V>> edges = new LinkedPositionalList<>();
 
   /**
-   * Returns the number of vertices of the com.airshipg.graph
+   * Returns the number of vertices of the airshipg.graph
    *
-   * @return the number of vertices of the com.airshipg.graph
+   * @return the number of vertices of the airshipg.graph
    */
   public int numVertices() {
     return vertices.size();
   }
 
   /**
-   * Returns the vertices of the com.airshipg.graph as an iterable collection
+   * Returns the vertices of the airshipg.graph as an iterable collection
    *
-   * @returnthe vertices of the com.airshipg.graph as an iterable collection
+   * @returnthe vertices of the airshipg.graph as an iterable collection
    */
   public Iterable<Vertex<V>> vertices() {
     return vertices;
   }
 
   /**
-   * Returns the number of edges of the com.airshipg.graph
+   * Returns the number of edges of the airshipg.graph
    *
    * @return
    */
@@ -142,7 +142,7 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
   }
 
   /**
-   * Returns the edges of the com.airshipg.graph as an iterable collection
+   * Returns the edges of the airshipg.graph as an iterable collection
    *
    * @return
    */
@@ -256,13 +256,13 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
   }
 
   /**
-   * Removes a vertex and all its incident edges from the com.airshipg.graph.
+   * Removes a vertex and all its incident edges from the airshipg.graph.
    *
    * @param v
    */
   public void removeVertex(Vertex<V> v) {
     InnerVertex<V> vert = validate(v);
-    // remove all incident edges from the com.airshipg.graph
+    // remove all incident edges from the airshipg.graph
     for (Edge<V> e : vert.getEdges()) {
       // remove this vertex from the list of vertices
       removeEdge(e);
@@ -293,7 +293,7 @@ public class AdjacencyMapGraph<V> implements Graph<V> {
     }
     // Safe cast:
 
-    // We COULD check if this edge is actually in this com.airshipg.graph...
+    // We COULD check if this edge is actually in this airshipg.graph...
     // naah.
     return (InnerEdge) e;
   }

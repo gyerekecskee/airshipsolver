@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 import java.io.Serializable;
 import java.util.Objects;

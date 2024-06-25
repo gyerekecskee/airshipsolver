@@ -1,6 +1,6 @@
 package com.graph;
 
-import com.airshipg.Pair;
+import airshipg.Pair;
 import java.util.Map;
 import java.util.Set;
 

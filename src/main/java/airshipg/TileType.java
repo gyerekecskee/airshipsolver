@@ -1,4 +1,4 @@
-package com.airshipg;
+package airshipg;
 
 import java.util.ArrayList;
 import java.util.Arrays;
