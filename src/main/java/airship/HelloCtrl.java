@@ -61,7 +61,10 @@ public class HelloCtrl implements Initializable {
     public Tile setGeneric(Tile tile, Button button) {
         mainCtrl.showSelect();
         tile = tileContainer.getTile();
-        URL url = getClass().getClassLoader().getResource("airship/" + tile.getType().getImageName());
+        String  imageName =  tile.getType().getImageName();
+        System.out.println(imageName);
+        URL url = this.getClass().getResource(imageName);
+        System.out.println(url);
         button.setGraphic(new ImageView(new Image(url.toString())));
         return tile;
     }

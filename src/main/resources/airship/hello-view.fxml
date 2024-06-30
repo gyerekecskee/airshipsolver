@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="298.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airship.airshipg.HelloCtrl">
+<AnchorPane prefHeight="298.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="airship.HelloCtrl">
    <children>
       <Label layoutX="217.0" layoutY="23.0" text="Input the current position" />
       <Button layoutX="269.0" layoutY="662.0" mnemonicParsing="false" onAction="#done" text="Done" />
