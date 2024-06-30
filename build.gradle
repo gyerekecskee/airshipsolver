@@ -3,6 +3,7 @@ plugins {
   id 'org.openjfx.javafxplugin' version '0.0.13'
   id 'application'
   id 'com.github.johnrengelman.shadow' version '7.1.2'
+  id 'org.javamodularity.moduleplugin' version '1.8.12'
 }
 
 group 'com.example'
@@ -29,14 +30,18 @@ javafx {
 }
 
 application {
-  mainClass = 'airshipg.Main'
+  mainModule = 'myModule'
+  mainClass = 'airship.Main'
 }
 
 jar {
   manifest {
     attributes(
-            'Main-Class': 'airshipg.Main'
+            'Main-Class': 'airship.Main'
     )
+//    from {
+//      configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+//    }
   }
 }
 
@@ -44,27 +49,27 @@ shadowJar {
   mergeServiceFiles()
   manifest {
     attributes(
-            'Main-Class': 'airshipg.Main'
+            'Main-Class': 'airship.Main'
     )
   }
   // Ensure that all dependencies are included
   configurations = [project.configurations.runtimeClasspath]
 }
 
-run {
-  // Use the 'runtimeClasspath' configuration for JavaFX modules
-  jvmArgs = [
-          '--module-path', configurations.runtimeClasspath.asPath,
-          '--add-modules', 'javafx.controls,javafx.fxml'
-  ]
-}
+//run {
+//   Use the 'runtimeClasspath' configuration for JavaFX modules
+//  jvmArgs = [
+//          '--module-path', configurations.runtimeClasspath.asPath,
+//          '--add-modules', 'javafx.controls,javafx.fxml'
+//  ]
+//}
 
-tasks.withType(JavaExec) {
+//tasks.withType(JavaExec) {
   // Ensures that all JavaExec tasks (including 'run') use the correct module path
-  doFirst {
-    jvmArgs = [
-            '--module-path', configurations.runtimeClasspath.asPath,
-            '--add-modules', 'javafx.controls,javafx.fxml'
-    ]
-  }
-}
+//  doFirst {
+//    jvmArgs = [
+//            '--module-path', configurations.runtimeClasspath.asPath,
+//            '--add-modules', 'javafx.controls,javafx.fxml'
+//    ]
+//  }
+//}

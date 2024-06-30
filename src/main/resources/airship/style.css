@@ -1,0 +1,21 @@
+#board {
+    -fx-alignment: center;
+}
+
+#board #image {
+    /*-fx-opacity: 0;*/
+}
+
+#buttons .button {
+    /*-fx-background-color: yellow;*/
+    -fx-pref-width: 1000;
+    -fx-pref-height: 1000;
+    /*-fx-opacity: 50;*/
+    -fx-background-color: transparent;
+}
+
+/*.tile-button {*/
+/*    -fx-text-fill: yellow;*/
+/*    -fx-pref-width: 50px;*/
+/*    -fx-pref-height: 100;*/
+/*}*/
