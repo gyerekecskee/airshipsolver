@@ -162,8 +162,13 @@ public class FinishCtrl implements Initializable {
   }
 
   private void updateButton(Label button, Tile tile) {
-    URL url = getClass().getClassLoader().getResource("airship/" + tile.getType().getImageName());
-    button.setGraphic(new ImageView(new Image(url.toString())));
+//    URL url = getClass().getClassLoader().getResource("airship/" + tile.getType().getImageName());
+//    button.setGraphic(new ImageView(new Image(url.toString())));
+    String  imageName =  tile.getType().getImageName();
+    URL url = this.getClass().getResource(imageName);
+    ImageView imageView = new ImageView(new Image(url.toString()));
+    imageView.setRotate(imageView.getRotate() - tile.getRotation());
+    button.setGraphic(imageView);
   }
 
   @Override

@@ -14,13 +14,19 @@ public class Tile implements Serializable {
   private final TileType type;
   private Coordinate position;
   private List<Coordinate> relativeRotatedObstacles;
+  private int rotation;
+
+  public int getRotation() {
+    return rotation;
+  }
 
   public Tile(TileType type, int degree) {
     if (degree % 90 != 0) {
       throw new IllegalArgumentException("degree must be a multiple of 90");
     }
     this.type = type;
-    rotate(degree);
+    this.rotation = degree;
+    relativeRotatedObstacles = rotate(type.getObstacles(), degree);
   }
 
   public TileType getType() {
@@ -89,8 +95,18 @@ public class Tile implements Serializable {
     while (degree > 0) {
       relativeRotatedObstacles = rotateOnce(relativeRotatedObstacles);
       degree = degree - 90;
+      rotation = rotation + 90;
     }
   }
+
+  private List<Coordinate> rotate(List<Coordinate> originalCoordinates, int degree) {
+    while (degree > 0) {
+      originalCoordinates = rotateOnce(originalCoordinates);
+      degree = degree - 90;
+    }
+    return originalCoordinates;
+  }
+
 
   public List<Coordinate> getRelativeObstacles() {
     return relativeRotatedObstacles;

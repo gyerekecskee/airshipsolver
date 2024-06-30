@@ -62,9 +62,7 @@ public class HelloCtrl implements Initializable {
         mainCtrl.showSelect();
         tile = tileContainer.getTile();
         String  imageName =  tile.getType().getImageName();
-        System.out.println(imageName);
         URL url = this.getClass().getResource(imageName);
-        System.out.println(url);
         button.setGraphic(new ImageView(new Image(url.toString())));
         return tile;
     }
@@ -158,9 +156,8 @@ public class HelloCtrl implements Initializable {
 
     public void handleMouseClick(MouseEvent event, Button button, Tile tile) {
         if (event.getButton() == MouseButton.SECONDARY) { // Check if right mouse button is clicked
-            System.out.println("right");
             ImageView imageView = (ImageView) button.getGraphic();
-            imageView.setRotate(imageView.getRotate() + 90);
+            imageView.setRotate(imageView.getRotate() - 90);
             tile.rotate(90);
         }
     }
