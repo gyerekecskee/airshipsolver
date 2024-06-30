@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package airshipg;
+package airship;
 
 import java.io.IOException;
 import java.net.URL;

@@ -1,4 +1,4 @@
-package airshipg;
+package airship;
 
 /**
  * Container class for Board.

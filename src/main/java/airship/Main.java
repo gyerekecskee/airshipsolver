@@ -1,9 +1,4 @@
-package airshipg;
-
-import javafx.application.Application;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+package airship;
 
 public class Main {
 
@@ -24,6 +19,11 @@ public class Main {
 //    }
 
     public static void main(String[] args) {
-        GUI.launch(GUI.class, args);
+        try {
+//            throw new RuntimeException("test");
+            GUI.launch(GUI.class, args);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,7 @@
-module airshipg.main {
+module myModule {
     requires javafx.controls;
     requires javafx.fxml;
 
-    exports airshipg;
+    opens airship to javafx.fxml;
+    exports airship;
 }

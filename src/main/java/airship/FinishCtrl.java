@@ -1,11 +1,11 @@
-package airshipg;
+package airship;
 
-import com.graph.AdjacencyMapGraph;
-import com.graph.Edge;
-import com.graph.Graph;
-import com.graph.PositionalList;
-import com.graph.ProbeHashMap;
-import com.graph.Vertex;
+import graph.AdjacencyMapGraph;
+import graph.Edge;
+import graph.Graph;
+import graph.PositionalList;
+import graph.ProbeHashMap;
+import graph.Vertex;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -18,13 +18,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 
 public class FinishCtrl implements Initializable {
 
   private static final Graph<Board> reachedPositions = new AdjacencyMapGraph<>();
-  private BoardContainer boardContainer = BoardContainer.getInstance();
+  private final BoardContainer boardContainer = BoardContainer.getInstance();
   private List<Board> solution;
   private int index = 0;
 
@@ -71,7 +73,7 @@ public class FinishCtrl implements Initializable {
     while (!unFinished.isEmpty() && !current.getElement().canAirshipEscape()) {
       current = unFinished.remove();
       for (Board successor : current.getElement().getAllValidSuccessors()) {
-        airshipg.Pair<Boolean, Vertex<Board>> result = reachedPositions.contains(successor);
+        Pair<Boolean, Vertex<Board>> result = reachedPositions.contains(successor);
         if (result.getFirst()) {
           if (!areTheyConnected(current, result.getSecond())) {
             reachedPositions.insertEdge(current, result.getSecond());
@@ -148,15 +150,20 @@ public class FinishCtrl implements Initializable {
 
   private void updateDisplay() {
     Board current = solution.get(index);
-    l00.setText(current.getTile(0, 0).toString());
-    l10.setText(current.getTile(1, 0).toString());
-    l20.setText(current.getTile(2, 0).toString());
-    l01.setText(current.getTile(0, 1).toString());
-    l11.setText(current.getTile(1, 1).toString());
-    l21.setText(current.getTile(2, 1).toString());
-    l02.setText(current.getTile(0, 2).toString());
-    l12.setText(current.getTile(1, 2).toString());
-    l22.setText(current.getTile(2, 2).toString());
+    updateButton(l00, current.getTile(0, 0));
+    updateButton(l10, current.getTile(1, 0));
+    updateButton(l20, current.getTile(2, 0));
+    updateButton(l01, current.getTile(0, 1));
+    updateButton(l11, current.getTile(1, 1));
+    updateButton(l21, current.getTile(2, 1));
+    updateButton(l02, current.getTile(0, 2));
+    updateButton(l12, current.getTile(1, 2));
+    updateButton(l22, current.getTile(2, 2));
+  }
+
+  private void updateButton(Label button, Tile tile) {
+    URL url = getClass().getClassLoader().getResource("airship/" + tile.getType().getImageName());
+    button.setGraphic(new ImageView(new Image(url.toString())));
   }
 
   @Override

@@ -1,4 +1,4 @@
-package com.graph;
+package graph;
 import java.util.List;
 
 public interface Edge<V> {

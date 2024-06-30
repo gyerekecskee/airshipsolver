@@ -1,4 +1,4 @@
-package airshipg;
+package airship;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -13,14 +13,14 @@ import java.util.stream.Collectors;
 public class Tile implements Serializable {
   private final TileType type;
   private Coordinate position;
-  private final List<Coordinate> relativeRotatedObstacles;
+  private List<Coordinate> relativeRotatedObstacles;
 
   public Tile(TileType type, int degree) {
     if (degree % 90 != 0) {
       throw new IllegalArgumentException("degree must be a multiple of 90");
     }
     this.type = type;
-    relativeRotatedObstacles = rotate(type.getObstacles(), degree);
+    rotate(degree);
   }
 
   public TileType getType() {
@@ -85,12 +85,11 @@ public class Tile implements Serializable {
 
   }
 
-  private List<Coordinate> rotate(List<Coordinate> originalCoordinates, int degree) {
+  public void rotate(int degree) {
     while (degree > 0) {
-      originalCoordinates = rotateOnce(originalCoordinates);
+      relativeRotatedObstacles = rotateOnce(relativeRotatedObstacles);
       degree = degree - 90;
     }
-    return originalCoordinates;
   }
 
   public List<Coordinate> getRelativeObstacles() {

@@ -10,7 +10,8 @@
     /*-fx-background-color: yellow;*/
     -fx-pref-width: 1000;
     -fx-pref-height: 1000;
-    -fx-opacity: 0;
+    /*-fx-opacity: 50;*/
+    -fx-background-color: transparent;
 }
 
 /*.tile-button {*/

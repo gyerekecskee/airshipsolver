@@ -1,4 +1,4 @@
-package airshipg;
+package airship;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -26,8 +26,9 @@ public class SelectCtrl implements Initializable {
 
     public void done() {
         try {
-            tileContainer.setTile(new Tile(tileType, Integer.parseInt(mButton.getText())));
+//            tileContainer.setTile(new Tile(tileType, Integer.parseInt(mButton.getText())));
 //        clearFields();
+            tileContainer.setTile(new Tile(tileType, 0));
             var stage = (Stage) mButton.getScene().getWindow();
             stage.close();
         } catch (NumberFormatException e) {
@@ -39,7 +40,6 @@ public class SelectCtrl implements Initializable {
     }
 
     public void menuSelected(ActionEvent event) {
-
         MenuItem selected = (MenuItem) event.getSource();
         mButton.setText(selected.getText());
     }
@@ -55,29 +55,36 @@ public class SelectCtrl implements Initializable {
 
     public void choseAirship() {
         tileType = (TileType.AIRSHIP);
+        done();
     }
 
     public void choseWhiteCorner() {
         tileType = (TileType.SMALL_CORNER);
+        done();
     }
 
     public void choseLargeCorner() {
         tileType = (TileType.LARGE_CORNER);
+        done();
     }
 
     public void choseEmpty() {
         tileType = (TileType.EMPTY);
+        done();
     }
 
     public void choseLargeBottom() {
         tileType = (TileType.LARGE_BOTTOM);
+        done();
     }
 
     public void choseDiagonal() {
         tileType = (TileType.DIAGONAL);
+        done();
     }
 
     public void choseColumn() {
         tileType = (TileType.COLUMN);
+        done();
     }
 }

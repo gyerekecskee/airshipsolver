@@ -1,4 +1,4 @@
-package airshipg;
+package airship;
 
 import java.io.Serializable;
 import java.util.ArrayList;

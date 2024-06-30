@@ -1,8 +1,8 @@
-package com.graph;
+package graph;
 
 //import java.util.Map;
 
-import airshipg.Pair;
+import airship.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

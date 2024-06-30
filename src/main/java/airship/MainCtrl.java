@@ -1,4 +1,4 @@
-package airshipg;
+package airship;
 
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -18,9 +18,9 @@ import javafx.stage.Stage;
 public class MainCtrl {
 
 
-  private static airshipg.BoardContainer boardContainer = airshipg.BoardContainer.getInstance();
+  private static BoardContainer boardContainer = BoardContainer.getInstance();
   private Stage primaryStage;
-  private airshipg.HelloCtrl helloCtrl;
+  private HelloCtrl helloCtrl;
   private Scene hello;
   private FinishCtrl finishCtrl;
   private Scene finish;
