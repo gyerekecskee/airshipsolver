@@ -12,79 +12,79 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Controller, responsible for handling the selection process.
+ */
 public class SelectCtrl implements Initializable {
 
-    private TileContainer tileContainer = TileContainer.getInstance();
-    private TileType tileType;
-    private MainCtrl mainCtrl;
+  private final TileContainer tileContainer = TileContainer.getInstance();
+  private TileType tileType;
+  @FXML
+  public HBox tipesbox;
+  @FXML
+  public MenuButton mButton;
 
-    @FXML
-    public HBox tipesbox;
-    @FXML
-    public MenuButton mButton;
-
-
-    public void done() {
-        try {
-//            tileContainer.setTile(new Tile(tileType, Integer.parseInt(mButton.getText())));
-//        clearFields();
-            tileContainer.setTile(new Tile(tileType, 0));
-            var stage = (Stage) mButton.getScene().getWindow();
-            stage.close();
-        } catch (NumberFormatException e) {
-            var alert = new Alert(Alert.AlertType.ERROR, "Make sure you have selected an orientation");
-            alert.initModality(Modality.APPLICATION_MODAL);
-            alert.setResizable(false);
-            alert.showAndWait();
-        }
+  /**
+   * Finishes the selection process.
+   */
+  public void done() {
+    try {
+      tileContainer.setTile(new Tile(tileType, 0));
+      var stage = (Stage) mButton.getScene().getWindow();
+      stage.close();
+    } catch (NumberFormatException e) {
+      var alert = new Alert(Alert.AlertType.ERROR, "Make sure you have selected an orientation");
+      alert.initModality(Modality.APPLICATION_MODAL);
+      alert.setResizable(false);
+      alert.showAndWait();
     }
+  }
 
-    public void menuSelected(ActionEvent event) {
-        MenuItem selected = (MenuItem) event.getSource();
-        mButton.setText(selected.getText());
-    }
+  public void menuSelected(ActionEvent event) {
+    MenuItem selected = (MenuItem) event.getSource();
+    mButton.setText(selected.getText());
+  }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-//        tipesbox.getChildren().addAll(new Button("airship"), new Button("small corner"), new Button("largecorner"), new Label("empty"), new Label("largebottom"), new Label("diagonal"), new Label("column"));
-    }
+  @Override
+  public void initialize(URL location, ResourceBundle resources) {
 
-    public void setCtrls(MainCtrl mainCtrl) {
-        this.mainCtrl = mainCtrl;
-    }
+  }
 
-    public void choseAirship() {
-        tileType = (TileType.AIRSHIP);
-        done();
-    }
+  public void setCtrls(MainCtrl mainCtrl) {
+  }
 
-    public void choseWhiteCorner() {
-        tileType = (TileType.SMALL_CORNER);
-        done();
-    }
+  public void choseAirship() {
+    tileType = (TileType.AIRSHIP);
+    done();
+  }
 
-    public void choseLargeCorner() {
-        tileType = (TileType.LARGE_CORNER);
-        done();
-    }
+  public void choseWhiteCorner() {
+    tileType = (TileType.SMALL_CORNER);
+    done();
+  }
 
-    public void choseEmpty() {
-        tileType = (TileType.EMPTY);
-        done();
-    }
+  public void choseLargeCorner() {
+    tileType = (TileType.LARGE_CORNER);
+    done();
+  }
 
-    public void choseLargeBottom() {
-        tileType = (TileType.LARGE_BOTTOM);
-        done();
-    }
+  public void choseEmpty() {
+    tileType = (TileType.EMPTY);
+    done();
+  }
 
-    public void choseDiagonal() {
-        tileType = (TileType.DIAGONAL);
-        done();
-    }
+  public void choseLargeBottom() {
+    tileType = (TileType.LARGE_BOTTOM);
+    done();
+  }
 
-    public void choseColumn() {
-        tileType = (TileType.COLUMN);
-        done();
-    }
+  public void choseDiagonal() {
+    tileType = (TileType.DIAGONAL);
+    done();
+  }
+
+  public void choseColumn() {
+    tileType = (TileType.COLUMN);
+    done();
+  }
 }

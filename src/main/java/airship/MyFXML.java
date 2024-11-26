@@ -28,12 +28,6 @@ import javafx.util.Pair;
  */
 public class MyFXML {
 
-//  private final Injector injector;
-
-//  public MyFXML(Injector injector) {
-//    this.injector = injector;
-//  }
-
   /**
    * Loads a controller class into its scene?.
    *
@@ -58,23 +52,4 @@ public class MyFXML {
     var path = Path.of("", parts).toString();
     return MyFXML.class.getClassLoader().getResource(path);
   }
-
-//  private class MyFactory implements BuilderFactory, Callback<Class<?>, Object> {
-//
-//    @Override
-//    @SuppressWarnings("rawtypes")
-//    public Builder<?> getBuilder(Class<?> type) {
-//      return new Builder() {
-//        @Override
-//        public Object build() {
-//          return injector.getInstance(type);
-//        }
-//      };
-//    }
-//
-//    @Override
-//    public Object call(Class<?> type) {
-//      return injector.getInstance(type);
-//    }
-//  }
 }

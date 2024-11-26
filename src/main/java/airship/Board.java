@@ -12,11 +12,28 @@ import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
+/**
+ * Class, representing a board of the game.
+ */
 public class Board implements Serializable {
   private final Grid grid;
   private int emptyPosX;
   private int emptyPosY;
 
+  /**
+   * Constructor for board.
+   *
+   * @param x0y2 the piece on the top left
+   * @param x1y2 the piece on the top center
+   * @param x2y2 the piece on the top right
+   * @param x0y1 the piece on the center left
+   * @param x1y1 the piece in the center
+   * @param x2y1 the piece on the center right
+   * @param x0y0 the piece on the bottom left
+   * @param x1y0 the piece on the bottom center
+   * @param x2y0 the piece on the bottom right
+   * @throws NoSuchElementException if there is no empty tiles
+   */
   public Board(Tile x0y2, Tile x1y2, Tile x2y2,
                Tile x0y1, Tile x1y1, Tile x2y1,
                Tile x0y0, Tile x1y0, Tile x2y0) throws NoSuchElementException {
@@ -48,11 +65,17 @@ public class Board implements Serializable {
   }
 
   /**
-   * CAN BE IMPROVED BY CHECKING FEWER TILES FOR COLLISIONS
+   * CAN BE IMPROVED BY CHECKING FEWER TILES FOR COLLISIONS.
    * this board gets moved and returned
    * moves the empty tile in the specified direction
+   *
+   * @param direction the direction to move the empty tile towards
+   * @return the updated board
+   * @throws IllegalArgumentException if the empty space would move out of the board or tiles would
+   *     collide or the specified direction doesn't exist
    */
   public Board moveEmptyTile(Direction direction) throws IllegalArgumentException {
+    //TODO clean up the exceptions
     Tile toBeMoved;
     List<Tile> neighbors;
     int xOffset = 0;
@@ -94,7 +117,18 @@ public class Board implements Serializable {
     return this;
   }
 
-  public Tile checkCollisionWithNeighbors(List<Tile> neighbors, int xOffset, int yOffset, Direction direction) {
+  /**
+   * Checks by moving the empty tile, two tiles would collide.
+   *
+   * @param neighbors the 8 neighboring tiles of the empty tile
+   * @param xOffset the offset of the tile to be moved
+   * @param yOffset the offset of the tile to be moved
+   * @param direction the direction in which the empty tile is getting moved
+   * @return the tile which is getting moved
+   */
+  public Tile checkCollisionWithNeighbors(List<Tile> neighbors, int xOffset, int yOffset,
+                                          Direction direction) {
+    //TODO the offsets can be inside this method
     Tile toBeMoved = grid.getTile(new Coordinate(emptyPosX + xOffset, emptyPosY + yOffset));
     for (Tile tile : neighbors) {
       if (theseCollide(toBeMoved, direction.opposite(), tile)) {
@@ -103,7 +137,14 @@ public class Board implements Serializable {
     }
     return toBeMoved;
   }
-//TODO 2 switches for one thing
+  //TODO 2 switches for one thing
+
+  /**
+   * Moves the tile in the specified direction, by updating the coordinates of the tiles.
+   *
+   * @param toBeMoved the tile to be moved
+   * @param direction the direction of the move
+   */
   public void moveTile(Tile toBeMoved, Direction direction) {
     int yOffSet = 0;
     int xOffset = 0;
@@ -127,6 +168,11 @@ public class Board implements Serializable {
     emptyPosX = emptyTile.getPosition().getX();
   }
 
+  /**
+   * Copies the board.
+   *
+   * @return the copy of the board
+   */
   public Board copy() {
     try {
       ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -143,27 +189,32 @@ public class Board implements Serializable {
   }
 
   /**
-   * CAN BE IMPROVED BY NOT CHECKING ALL THE TILES ONLY THE NEIGHBORING ONES
-   * @return
+   * CAN BE IMPROVED BY NOT CHECKING ALL THE TILES ONLY THE NEIGHBORING ONES.
+   *
+   * @return all the non-empty tiles
    */
   private List<Tile> getNeighborsOfEmptyTile() {
     return grid.getNonEmptyTiles();
-//    List<Tile> neighbors = new ArrayList<>();
-//    for (int i = 0; i < grid.size(); i++) {
-//      for (int j = 0; j < grid.get(i).size(); j++) {
-//        if (!(Math.abs(i - emptyPosY) == 0 && Math.abs(j - emptyPosX) == 0) && Math.abs(i - emptyPosY) != 2 && Math.abs(j - emptyPosX) != 2) {
-//          neighbors.add(grid.get(i).get(j));
-//        }
-//      }
-//    }
-//    return neighbors;
   }
 
   private boolean areNeighbors(Tile tile1, Tile tile2) {
-    return !(Math.abs(tile1.getPosition().getY() - tile2.getPosition().getY()) == 0 && Math.abs(tile1.getPosition().getX() - tile2.getPosition().getX()) == 0) && Math.abs(tile1.getPosition().getY() - tile2.getPosition().getY()) != 2 && Math.abs(tile1.getPosition().getX() - tile2.getPosition().getX()) != 2;
+    return !(Math.abs(tile1.getPosition().getY() - tile2.getPosition().getY()) == 0
+        && Math.abs(tile1.getPosition().getX() - tile2.getPosition().getX()) == 0)
+        && Math.abs(tile1.getPosition().getY() - tile2.getPosition().getY()) != 2
+        && Math.abs(tile1.getPosition().getX() - tile2.getPosition().getX()) != 2;
   }
 
-  public boolean theseCollide(Tile moved, Direction direction, Tile stationary) {
+  /**
+   * Checks whether to tiles would collide.
+   *
+   * @param moved the moved tile
+   * @param direction the direction of the move
+   * @param stationary a tile which we check with the moved one
+   * @return true if they would collide, false otherwise
+   * @throws IllegalArgumentException if the direction doesn't exist
+   */
+  public boolean theseCollide(Tile moved, Direction direction, Tile stationary)
+      throws IllegalArgumentException {
     if (moved.equals(stationary)) {
       return false;
     }
@@ -180,22 +231,34 @@ public class Board implements Serializable {
       case RIGHT -> {
         return checkCollision(moved, stationary, 1, 0, 2, 0);
       }
+      default -> {
+        throw new IllegalArgumentException("no such direction exists");
+      }
     }
-    return false;
   }
 
+  /**
+   * Checks if the airship is next to the exit and whether it would collide
+   *  with another tile by exiting.
+   *
+   * @return true if the airship could escape,false otherwise
+   */
   public boolean canAirshipEscape() {
-    if (grid.getTile(new Coordinate(1, 0)).getType().equals(TileType.AIRSHIP)){
+    if (grid.getTile(new Coordinate(1, 0)).getType().equals(TileType.AIRSHIP)) {
       return !theseCollide(getTile(1, 0), Direction.DOWN, getTile(2, 0))
-      && !theseCollide(getTile(1, 0), Direction.DOWN, getTile(0, 0));
+        && !theseCollide(getTile(1, 0), Direction.DOWN, getTile(0, 0));
     }
     return false;
   }
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Board board = (Board) o;
     return emptyPosX == board.emptyPosX && emptyPosY == board.emptyPosY && Objects.equals(
         grid, board.grid);
@@ -220,21 +283,42 @@ public class Board implements Serializable {
   }
 
   /**
-   * Converts the obstacle coordinates of toBeTransformed to a list of coordinates that overlap with the coordinates of the etalon tile
-   * @param toBeTransformed
-   * @param etalon
-   * @return
+   * Converts the obstacle coordinates of toBeTransformed to a list of coordinates that overlap
+   * with the coordinates of the etalon tile.
+   *
+   * @param toBeTransformed the tile whose coordinates we want to transform
+   * @param etalon the new reference for the coordinates
+   * @return the new list of coordinates
    */
   public static List<Coordinate> convertCoords(Tile toBeTransformed, Tile etalon) {
-    return toBeTransformed.getRelativeObstacles().stream().map(colPosOfToBeTransformed -> new Coordinate(colPosOfToBeTransformed.getX() + (toBeTransformed.getPosition().getX() - etalon.getPosition().getX()) * 2,
-        colPosOfToBeTransformed.getY() + (toBeTransformed.getPosition().getY() - etalon.getPosition().getY()) * 2)).toList();
+    return toBeTransformed.getRelativeObstacles().stream().map(colPosOfToBeTransformed ->
+        new Coordinate(colPosOfToBeTransformed.getX() + (toBeTransformed.getPosition().getX()
+            - etalon.getPosition().getX()) * 2,
+        colPosOfToBeTransformed.getY() + (toBeTransformed.getPosition().getY()
+            - etalon.getPosition().getY()) * 2)).toList();
   }
 
-  public static boolean checkCollision(Tile moved, Tile stationary, int xOffset, int yOffset, int movedByINXDirection, int movedByInYDirection) {
+  /**
+   * Checks whether two tiles have collied by a move.
+   *
+   * @param moved the moved tile
+   * @param stationary the stationary tile
+   * @param xOffset the offset of the moved tile
+   * @param yOffset the offset of the moved tile
+   * @param movedByINXDirection the amount the moved tile was moved vertically
+   * @param movedByInYDirection the amount the moved tile was moved horizontally
+   * @return true if they have collided, false otherwise
+   */
+  public static boolean checkCollision(Tile moved, Tile stationary, int xOffset, int yOffset,
+                                       int movedByINXDirection, int movedByInYDirection) {
     //TODO refactor
     List<Coordinate> coordinatesCenteredOnStationary = convertCoords(moved, stationary);
     for (Coordinate coordinate : coordinatesCenteredOnStationary) {
-      if (stationary.getRelativeObstacles().contains(coordinate.add(new Coordinate(movedByINXDirection, movedByInYDirection))) || stationary.getRelativeObstacles().contains(coordinate.add(new Coordinate(-xOffset + movedByINXDirection, -yOffset + movedByInYDirection)))) {
+      if (stationary.getRelativeObstacles().contains(coordinate.add(
+          new Coordinate(movedByINXDirection, movedByInYDirection)))
+          || stationary.getRelativeObstacles().contains(coordinate.add(
+              new Coordinate(-xOffset + movedByINXDirection, -yOffset
+                  + movedByInYDirection)))) {
         return true;
       }
     }
@@ -245,6 +329,11 @@ public class Board implements Serializable {
     return grid.getNonEmptyTiles();
   }
 
+  /**
+   * Returns all the possible positions after a move.
+   *
+   * @return a list of possible positions after a move
+   */
   public List<Board> getAllValidSuccessors() {
     List<Board> validSuccessors = new ArrayList<>();
     for (Direction direction : Direction.values()) {
@@ -254,12 +343,18 @@ public class Board implements Serializable {
     return validSuccessors;
   }
 
+  /**
+   * Calculates whether a move can be carried out.
+   *
+   * @param direction the direction of the move
+   * @return the new position if possible, null otherwise
+   */
   public Optional<Board> getValidSuccessorFor(Direction direction) {
     Optional<Board> result = Optional.empty();
     try {
       result = Optional.of(copy().moveEmptyTile(direction));
     } catch (IllegalArgumentException ignored) {
-
+      System.out.println("Exception ignored");
     }
     return result;
   }

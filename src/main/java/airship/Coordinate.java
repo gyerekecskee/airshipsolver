@@ -3,6 +3,9 @@ package airship;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * Class, representing coordinates.
+ */
 public class Coordinate implements Serializable {
   private int posX;
   private int posY;
@@ -30,8 +33,12 @@ public class Coordinate implements Serializable {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Coordinate that = (Coordinate) o;
     return posX == that.posX && posY == that.posY;
   }

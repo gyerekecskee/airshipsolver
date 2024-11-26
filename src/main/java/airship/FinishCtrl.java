@@ -23,6 +23,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Controller, responsible for handling the finish scene.
+ */
 public class FinishCtrl implements Initializable {
 
   private static final Graph<Board> reachedPositions = new AdjacencyMapGraph<>();
@@ -61,7 +64,9 @@ public class FinishCtrl implements Initializable {
   @FXML
   public Label l22;
 
-
+  /**
+   * Solves the board.
+   */
   public void solve() {
     Board startingPosition = boardContainer.getBoard();
 
@@ -74,9 +79,9 @@ public class FinishCtrl implements Initializable {
       current = unFinished.remove();
       for (Board successor : current.getElement().getAllValidSuccessors()) {
         Pair<Boolean, Vertex<Board>> result = reachedPositions.contains(successor);
-        if (result.getFirst()) {
-          if (!areTheyConnected(current, result.getSecond())) {
-            reachedPositions.insertEdge(current, result.getSecond());
+        if (result.first()) {
+          if (!areTheyConnected(current, result.second())) {
+            reachedPositions.insertEdge(current, result.second());
           }
         } else {
           insertedNew = reachedPositions.insertVertex(successor.copy());
@@ -88,11 +93,13 @@ public class FinishCtrl implements Initializable {
       System.out.println("Number of unchecked vertices: " + unFinished.size());
     }
     System.out.println("!unFinished.isEmpty(): " + !unFinished.isEmpty());
-    System.out.println("!current.getElement().canAirshipEscape(): " + !current.getElement().canAirshipEscape());
+    System.out.println("!current.getElement().canAirshipEscape(): "
+        + !current.getElement().canAirshipEscape());
     System.out.println("Escape: " + current);
     Map<Vertex<Board>, Edge<Board>> forest = new ProbeHashMap<>();
-    reachedPositions.BFS(inserted, new HashSet<>(), forest);
-    PositionalList<Edge<Board>> bSolution = reachedPositions.constructPath(inserted, current, forest);
+    reachedPositions.breadthFirstSearch(inserted, new HashSet<>(), forest);
+    PositionalList<Edge<Board>> bSolution
+        = reachedPositions.constructPath(inserted, current, forest);
     List<Board> gSolution = new ArrayList<>();
     for (Edge<Board> edge : bSolution) {
       gSolution.add(edge.getEndpoints().get(0).getElement());
@@ -106,14 +113,7 @@ public class FinishCtrl implements Initializable {
 
     inf.setVisible(false);
     next.setVisible(true);
-//    KeyCombination right = new KeyCodeCombination(KeyCode.RIGHT);
-//    Mnemonic mr = new Mnemonic(next, right);
-//    Scene scene = next.getScene();
-//    scene.addMnemonic(mr);
     prev.setVisible(true);
-//    KeyCombination left = new KeyCodeCombination(KeyCode.D);
-//    Mnemonic ml = new Mnemonic(prev, left);
-//    scene.addMnemonic(ml);
     last.setVisible(true);
     first.setVisible(true);
     gPane.setVisible(true);
@@ -162,8 +162,6 @@ public class FinishCtrl implements Initializable {
   }
 
   private void updateButton(Label button, Tile tile) {
-//    URL url = getClass().getClassLoader().getResource("airship/" + tile.getType().getImageName());
-//    button.setGraphic(new ImageView(new Image(url.toString())));
     String  imageName =  tile.getType().getImageName();
     URL url = this.getClass().getResource(imageName);
     ImageView imageView = new ImageView(new Image(url.toString()));
