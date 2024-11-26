@@ -1,4 +1,4 @@
-## AstEscSolver
+# AstEscSolver
 
 ## Description
 This application can solve levels of the game called Asteroid Escape[https://www.smartgames.eu/uk/one-player-games/asteroid-escape]. 
