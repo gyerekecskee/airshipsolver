@@ -15,22 +15,28 @@ import javafx.scene.layout.BackgroundSize;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Controller, responsible for the whole application.
+ */
 public class MainCtrl {
 
 
-  private static BoardContainer boardContainer = BoardContainer.getInstance();
-  private Stage primaryStage;
-  private HelloCtrl helloCtrl;
-  private Scene hello;
-  private FinishCtrl finishCtrl;
-  private Scene finish;
-  private boolean debugging = false;
+  private static final BoardContainer boardContainer = BoardContainer.getInstance();
+  private final Stage primaryStage;
+  private final Scene hello;
+  private final FinishCtrl finishCtrl;
+  private final Scene finish;
 
-
+  /**
+   * Constructor for MainCtrl.
+   *
+   * @param primaryStage the primary stage of th app
+   * @throws IOException if an error occurs during loading an fxml
+   */
   public MainCtrl(Stage primaryStage) throws IOException {
     this.primaryStage = primaryStage;
 
-    String imageUrl = String.valueOf(Main.class.getResource("board-empty.png")); // Replace with your image file path
+    String imageUrl = String.valueOf(Main.class.getResource("board-empty.png"));
 
     // Create a BackgroundImage
     BackgroundImage backgroundImage = new BackgroundImage(
@@ -49,34 +55,20 @@ public class MainCtrl {
     );
 
     // Create a Background using the BackgroundImage
-    Background background = new Background(backgroundImage);
-
-
+    new Background(backgroundImage);
 
     FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
 
     hello = new Scene(fxmlLoader.load());
-    helloCtrl = fxmlLoader.getController();
+    HelloCtrl helloCtrl = fxmlLoader.getController();
     helloCtrl.setCtrls(this);
-    // Apply the background to the Pane
-//    helloCtrl.setBackground(background);
 
     fxmlLoader = new FXMLLoader(Main.class.getResource("finish.fxml"));
     Parent root = fxmlLoader.load();
-//    root.setFocusTraversable(false);
     finish = new Scene(root);
     finishCtrl = fxmlLoader.getController();
-//    finishCtrl.setBackground(background);
 
-//    helloCtrl.setCtrls(this);
-
-
-//    this.selectCtrl = select.getKey();
-//    this.select = new Scene(select.getValue());
-//
-//    this.helloCtrl = hello.getKey();
-//    this.hello = new Scene(hello.getValue());
-
+    boolean debugging = false;
     if (debugging) {
       boardContainer.setBoard(initializeStartingPosition2());
       showFinish();
@@ -92,6 +84,9 @@ public class MainCtrl {
     primaryStage.setScene(hello);
   }
 
+  /**
+   * Shows the select scene.
+   */
   public void showSelect() {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("selecttile.fxml"));
@@ -108,6 +103,9 @@ public class MainCtrl {
     }
   }
 
+  /**
+   * Shows the finish scene.
+   */
   public void showFinish() {
     primaryStage.setScene(finish);
     finishCtrl.solve();
